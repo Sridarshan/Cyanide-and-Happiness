@@ -5,8 +5,16 @@ from bs4 import BeautifulSoup
 
 socket.setdefaulttimeout(10)
 
+def getTodayIndex():
+    url = "http://explosm.net/comics/new"
+    r = urllib2.urlopen(url)
+    splits = r.geturl().split('/')
+    index = splits.index('comics')+1
+    today = splits[index]
+    return int(today)
+
 def startGrabbing(count):
-    day = 3677
+    day = getTodayIndex() 
     for i in xrange(count):
         url = "http://explosm.net/comics/" + `day`
         try:
